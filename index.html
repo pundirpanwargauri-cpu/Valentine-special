@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Forever Valentine 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff5f9e,#a855f7);
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+}
+
+.heart{
+    position:absolute;
+    bottom:-20px;
+    font-size:20px;
+    animation:floatUp linear infinite;
+    opacity:0.6;
+}
+@keyframes floatUp{
+    to{transform:translateY(-120vh) scale(1.6)}
+}
+
+.card{
+    background:rgba(255,255,255,0.94);
+    width:90%;
+    max-width:520px;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 25px 50px rgba(0,0,0,0.3);
+    text-align:center;
+}
+
+h1{
+    font-family:'Great Vibes',cursive;
+    color:#ff2f92;
+    font-size:52px;
+}
+
+.question{
+    font-size:18px;
+    color:#444;
+    margin:12px 0;
+}
+
+.photo{
+    width:100%;
+    border-radius:18px;
+    margin:15px 0;
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    margin:8px 0;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    background:linear-gradient(135deg,#ff7eb3,#ff4d9d);
+    color:white;
+    transition:.3s;
+}
+.btn:hover{transform:scale(1.06)}
+
+.feedback{
+    margin-top:15px;
+    font-size:18px;
+    font-weight:600;
+    color:#ff2f92;
+    animation:fade .4s ease;
+}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1}
+}
+
+.final img{
+    width:220px;
+    margin-top:15px;
+    border-radius:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="quizBox"></div>
+
+<script>
+/* floating hearts */
+for(let i=0;i<20;i++){
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerText="💖";
+ h.style.left=Math.random()*100+"vw";
+ h.style.animationDuration=(6+Math.random()*6)+"s";
+ document.body.appendChild(h);
+}
+
+const quiz = [
+ {q:"When did we meet for the first time?",options:["14 Feb","28 May","10 June","1 Jan"],ans:"28 May"},
+ {q:"Our wedding date?",options:["14 Feb","27 Nov","10 Dec","5 Jan"],ans:"27 Nov"},
+ {q:"Where did we click this photo?",img:"couple.jpg",options:["Manali","Shimla","Kempty Fall","Mussoorie"],ans:"Kempty Fall"},
+ {q:"When was our baby born?",options:["31 Oct 2025","1 Nov 2025","30 Oct 2025","25 Oct 2025"],ans:"31 Oct 2025"},
+ {q:"Will you be my Valentine forever? 🌹",options:["Yes ❤️","Always 😘"],ans:"Yes ❤️"}
+];
+
+let i=0;
+
+function load(msg=""){
+ let img = quiz[i].img ? `<img src="${quiz[i].img}" class="photo">` : "";
+ document.getElementById("quizBox").innerHTML = `
+ <h1>My Love 💕</h1>
+ <div class="question">${quiz[i].q}</div>
+ ${img}
+ ${quiz[i].options.map(o=>`<button class="btn" onclick="check('${o}')">${o}</button>`).join("")}
+ <div class="feedback">${msg}</div>
+ `;
+}
+
+function check(sel){
+ if(sel===quiz[i].ans){
+   if(i===quiz.length-1){
+     document.getElementById("quizBox").innerHTML=`
+       <h1>Love You 💖</h1>
+       <div class="feedback">Love You Infinite ×1000<br>Forever & Always</div>
+       <div class="final">
+         <img src="https://media.giphy.com/media/l4FGpPki5v2Bcd6Ss/giphy.gif">
+       </div>
+     `;
+   }else{
+     i++;
+     load("Correct 💕");
+   }
+ }else{
+   load("Awww 😅 try again baby");
+ }
+}
+
+load();
+</script>
+
+</body>
+</html>
